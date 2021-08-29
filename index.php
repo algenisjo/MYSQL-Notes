@@ -40,7 +40,7 @@ if (isset($_GET['id'])) {
             <?php else: ?>
                 New note
             <?php endif ?>
-        </button>
+        </button>   
     </form>
     <div class="notes">
         <?php foreach ($notes as $note): ?>
@@ -63,4 +63,4 @@ if (isset($_GET['id'])) {
     </div>
 </div>
 </body>
-</html>
+</html>d
