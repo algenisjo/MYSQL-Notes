@@ -4,20 +4,29 @@ class Connection
 {
     public $pdo = null;
 
+ 
 //connecting to databse and if error then outputting a message
-    public function __construct()
-    {
-        try {
-            //pdo is the function we use to call and attempt connection to a databse. this function works across all databse types
-            $this->pdo = new PDO('mysql:server=localhost;dbname=notes', 'root', '');
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $exception) {
-            echo "ERROR: " . $exception->getMessage();
-        }
+//connecting the project to a remote server so that it can be viewed live
+public function __construct()
+{
 
+    $server = "sql203.epizy.com";
+    $username = "epiz_29582470";
+    $password ="sMKoERtPGuWgWN";
+    $dbname = "epiz_29582470_mysqlnotesdb";
+
+    try {
+        $this->pdo = new PDO("mysql:host=$server;dbname=$dbname", $username, $password);
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $exception) {
+        echo "ERROR: " . $exception->getMessage();
     }
+
+
+}
+
 // lets connect oto the databse and retrieving data as an associated array
-    public function getNotes()
+    public function getNotes() 
     {
         $statement = $this->pdo->prepare("SELECT * FROM notes ORDER BY create_date DESC");
         $statement->execute();
